@@ -1,0 +1,26 @@
+{
+  "name": "koder17",
+  "version": "1.0.0",
+  "description": "asdf",
+  "main": "bot.js",
+  "author": "Koder17",
+  "dependencies": {
+    "discord.io": "github:woor/discord.io#gateway_v6",
+    "discord.js": "^11.3.2",
+    "dom-parser": "^0.1.5",
+    "jdom": "^2.3.0",
+    "jsdom": "^11.11.0",
+    "npm": "^6.1.0",
+    "query-selector": "^1.0.9",
+    "request": "^2.87.0",
+    "url": "^0.11.0",
+    "winston": "^2.4.2",
+    "xmlhttprequest": "^1.8.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+	"start": "node bot.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "ISC"
+}
