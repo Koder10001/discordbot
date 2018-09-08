@@ -6,8 +6,9 @@ const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 const request = require("request");
 const {URL, URLSearchParams} = require('url');
-const http = require("http").createServer(serv);
+const server = require("http").createServer(serv);
 const path = require("path");
+const http = require("http");
 
 function serv(req,res){
     if(req.url == "/"){
@@ -18,7 +19,7 @@ function serv(req,res){
         res.end(data);
     })
 }
-http.listen(process.env.PORT || 80,function(){
+server.listen(process.env.PORT || 80,function(){
     console.log("listening on port " + (process.env.PORT || 80));
 })
 // Configure logger settings
