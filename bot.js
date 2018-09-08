@@ -1,12 +1,26 @@
-
-var Discord = require('discord.io');
-var logger = require('winston');
-var auth = require('./auth.json');
-var fs = require("fs");
+const Discord = require('discord.io');
+const logger = require('winston');
+const auth = require('./auth.json');
+const fs = require("fs");
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
-var request = require("request");
+const request = require("request");
 const {URL, URLSearchParams} = require('url');
+const http = require("http").createServer(serv);
+const path = require("path");
+
+function serv(req,res){
+    if(req.url == "/"){
+        req.url = "index.html";
+    }
+    fs.readFile(path.join("public",req.url),function(err,data){
+        res.writeHead(200);
+        res.end(data);
+    })
+}
+http.listen(process.env.PORT || 80,function(){
+    console.log("listening on port " + (process.env.PORT || 80));
+})
 // Configure logger settings
 logger.remove(logger.transports.Console);
 logger.add(logger.transports.Console, {
@@ -80,7 +94,9 @@ function getNews(id,check = true){
 function checkOnline(url,id, check){
     request({uri: url}, (err, res, body)=>{
         var html = new JSDOM(body);
-        stat = html.window.document.querySelector("div.ipsType_normal.ipsType_richText.ipsContained > p:nth-child(1) > img").src;
+        stat = html.window.document.querySelector("div.ipsType_normal.ipsType_richText.ipsContained > p:nth-child(1) > img")//.src;
+        bot.sendMessage({to: id,message: stat.src});
+        return;
         stat = new URL(stat);
         stat = stat.searchParams.get("img");
         console.log(check);
