@@ -137,3 +137,11 @@ function checkOnline(url,id, check){
         })
     })
 }
+
+
+
+
+// keep heroku alive
+setInterval(function() {
+    http.get("http://tranquil-bayou-68164.herokuapp.com/");
+}, 300000);
