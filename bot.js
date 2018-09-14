@@ -39,6 +39,10 @@ bot.on('ready', function (evt) {
     logger.info(bot.username + ' - (' + bot.id + ')');
 });
 
+bot.on("disconnect",function(){
+    bot.connect();
+})
+
 bot.on('message', function (user, userID, channelID, message, evt) {
     // Our bot needs to know if it will execute a command
     // It will listen for messages that will start with `!`
@@ -95,9 +99,8 @@ function getNews(id,check = true){
 function checkOnline(url,id, check){
     request({uri: url}, (err, res, body)=>{
         var html = new JSDOM(body);
-        stat = html.window.document.querySelector("div.ipsType_normal.ipsType_richText.ipsContained > p:nth-child(1) > img")//.src;
-        bot.sendMessage({to: id,message: stat.src});
-        return;
+        stat = html.window.document.querySelector("div.ipsType_normal.ipsType_richText.ipsContained > p:nth-child(1) > img").src;
+        bot.sendMessage({to: id,message: stat});
         stat = new URL(stat);
         stat = stat.searchParams.get("img");
         console.log(check);
