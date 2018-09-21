@@ -100,7 +100,7 @@ function checkOnline(url,id, check){
     request({uri: url}, (err, res, body)=>{
         var html = new JSDOM(body);
         stat = html.window.document.querySelector("div.ipsType_normal.ipsType_richText.ipsContained > p:nth-child(1) > img").src;
-        bot.sendMessage({to: id,message: stat});
+        //bot.sendMessage({to: id,message: stat});
         stat = new URL(stat);
         stat = stat.searchParams.get("img");
         console.log(check);
